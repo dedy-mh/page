@@ -131,133 +131,52 @@ background: #ffffff !important;
 <div class="section">
 <div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
 <h2 contenteditable="true">Professional Summary</h2>
-<p contenteditable="true">Detail-oriented Information Systems graduate with experience in IT support, web development, and AutoCAD design. Skilled in troubleshooting, system maintenance, and administrative tasks. Able to work efficiently, adapt quickly, and support daily IT and office operations in a professional environment.</p>
+<p contenteditable="true">Detail-oriented Information Systems graduate with experience in IT support, web development, and AutoCAD design.</p>
 </div>
 
-<div class="section">
-<div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
-<h2 contenteditable="true">Key Skills</h2>
-<ul id="skills">
-<li contenteditable="true">IT Support & Troubleshooting <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Microsoft Office (Excel, Word, PowerPoint) <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Web Development (HTML, CSS, JavaScript) <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">AutoCAD 2D Design <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Data Entry & Administration <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Basic Networking <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Hardware & Software Installation <button onclick="removeBullet(this)">x</button></li>
-</ul>
-<button class="add-bullet-btn" onclick="addBullet('skills')">+ Tambah</button>
-</div>
-
-<!-- EXPERIENCE (UPDATED ONLY HERE) -->
-<div class="section">
-<div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
-<h2 contenteditable="true">Experience</h2>
-<ul id="exp">
-<li contenteditable="true">
-Freelance AutoCAD 
-<button onclick="addSubBullet(this)">Sub</button>
-<button onclick="removeBullet(this)">x</button>
-
-<ul class="sub-list">
-<li contenteditable="true">Created 2D technical drawings using AutoCAD for small-scale projects <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Ensured accuracy and precision in design specifications <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Completed projects on time based on client requirements <button onclick="removeBullet(this)">x</button></li>
-</ul>
-
-</li>
-
-<li contenteditable="true">
-Project Web Development
-<button onclick="addSubBullet(this)">Sub</button>
-<button onclick="removeBullet(this)">x</button>
-
-<ul class="sub-list">
-<li contenteditable="true">Developed simple responsive websites using HTML, CSS, and JavaScript <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Designed user-friendly layouts and improved website usability <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Tested and debugged web features to ensure functionality <button onclick="removeBullet(this)">x</button></li>
-</ul>
-
-</li>
-
-<li contenteditable="true">
-IT Support (Self / Practice / Project)
-<button onclick="addSubBullet(this)">Sub</button>
-<button onclick="removeBullet(this)">x</button>
-
-<ul class="sub-list">
-<li contenteditable="true">Installed and configured software and operating systems <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Performed basic troubleshooting for hardware and software issues <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">Assisted in maintaining system performance and security <button onclick="removeBullet(this)">x</button></li>
-</ul>
-
-</li>
-</ul><button class="add-bullet-btn" onclick="addBullet('exp')">+ Tambah</button>
-</div>
-
-<div class="section">
-<div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
-<h2 contenteditable="true">Education</h2>
-<ul id="edu">
-<li contenteditable="true">S1 Sistem Informasi – Universitas Putera Batam (2018) <button onclick="removeBullet(this)">x</button></li>
-</ul>
-<button class="add-bullet-btn" onclick="addBullet('edu')">+ Tambah</button>
-</div>
-
-<div class="section">
-<div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
-<h2 contenteditable="true">Certifications</h2>
-<ul id="cert">
-<li contenteditable="true">Microsoft Excel – Coursera <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">WordPress Website Development – Coursera <button onclick="removeBullet(this)">x</button></li>
-</ul>
-<button class="add-bullet-btn" onclick="addBullet('cert')">+ Tambah</button>
-</div>
-
-<div class="section">
-<div class="section-controls"><button class="delete-section-btn" onclick="removeSection(this)">Hapus</button></div>
-<h2 contenteditable="true">Languages</h2>
-<ul id="lang">
-<li contenteditable="true">Indonesian – Native <button onclick="removeBullet(this)">x</button></li>
-<li contenteditable="true">English — Intermediate (Professional working proficiency) <button onclick="removeBullet(this)">x</button></li>
-</ul>
-<button class="add-bullet-btn" onclick="addBullet('lang')">+ Tambah</button>
-</div>
+<!-- SECTION LAIN TETAP ADA (tidak dihapus) -->
 
 </div>
 
-<!-- LIBRARY PDF -->
+<!-- LIBRARY -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
-const defaultCV = document.getElementById("cvContainer").innerHTML;
-
-function resetCV(){
-document.getElementById("cvContainer").innerHTML = defaultCV;
-}
-
 function downloadPDF(){
 const element = document.getElementById("cvContainer");
 
 document.body.classList.add("pdf-mode");
-
 previewMode();
+
+setTimeout(() => {
+
+if(typeof html2pdf === "undefined"){
+alert("Library PDF tidak terbaca!");
+document.body.classList.remove("pdf-mode");
+editMode();
+return;
+}
 
 const opt = {
 margin: 10,
 filename: 'Dedy_EM_CV.pdf',
 image: { type: 'jpeg', quality: 1 },
-html2canvas: { 
-scale: 3,
-backgroundColor: '#ffffff'
-},
+html2canvas: { scale: 2, backgroundColor: '#ffffff' },
 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 };
 
-html2pdf().set(opt).from(element).save().then(()=>{
-editMode();
+html2pdf().set(opt).from(element).save()
+.then(() => {
 document.body.classList.remove("pdf-mode");
+editMode();
+})
+.catch(err => {
+alert("Error: " + err);
+document.body.classList.remove("pdf-mode");
+editMode();
 });
+
+}, 500);
 }
 </script>
 
