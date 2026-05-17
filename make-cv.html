@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Make CV Dedy Martin Hutagalung</title>
+
 <link rel="icon" href="favicon-dmh.svg" type="image/svg+xml">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -73,6 +75,15 @@ background:#1e40af;
 background:#2563eb;
 }
 
+.remove-btn{
+background:#dc2626;
+margin-top:5px;
+}
+
+.remove-btn:hover{
+background:#b91c1c;
+}
+
 .section-box{
 padding:12px;
 border:1px solid #dbeafe;
@@ -86,7 +97,6 @@ background:#fff;
 max-width:850px;
 margin:auto;
 padding:35px;
-box-shadow:none;
 border-top:6px solid #1d4ed8;
 }
 
@@ -144,13 +154,10 @@ color:#2563eb;
 word-break:break-word;
 }
 
-table{
-width:100%;
-}
-
-td{
-vertical-align:top;
-padding-bottom:4px;
+.contact-item{
+margin-bottom:6px;
+line-height:1.7;
+word-break:break-word;
 }
 
 @media(max-width:900px){
@@ -301,24 +308,41 @@ const elements=document.querySelectorAll('input, textarea');
 
 elements.forEach(function(el){
 
-el.removeEventListener('input', updatePreview);
-el.addEventListener('input', updatePreview);
+el.removeEventListener('input', handleInput);
+el.addEventListener('input', handleInput);
 
 });
 
 }
 
-function addExperience(){
+function handleInput(){
+
+updatePreview();
+saveDraft();
+
+}
+
+function removeSection(button){
+
+button.parentElement.remove();
+
+updatePreview();
+saveDraft();
+
+}
+
+function addExperience(data={}){
 
 const div=document.createElement('div');
 
 div.className='section-box exp-item';
 
 div.innerHTML=
-'<input type="text" class="exp-company" placeholder="Nama Perusahaan">'+
-'<input type="text" class="exp-role" placeholder="Posisi">'+
-'<input type="text" class="exp-date" placeholder="Jan 2024 - Mar 2026">'+
-'<textarea class="exp-desc" placeholder="Tugas pekerjaan (1 baris = 1 bullet point)"></textarea>';
+'<input type="text" class="exp-company" placeholder="Nama Perusahaan" value="'+(data.company || '')+'">'+
+'<input type="text" class="exp-role" placeholder="Posisi" value="'+(data.role || '')+'">'+
+'<input type="text" class="exp-date" placeholder="Jan 2024 - Mar 2026" value="'+(data.date || '')+'">'+
+'<textarea class="exp-desc" placeholder="Tugas pekerjaan (1 baris = 1 bullet point)">'+(data.desc || '')+'</textarea>'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('experienceContainer').appendChild(div);
 
@@ -327,16 +351,17 @@ updatePreview();
 
 }
 
-function addEducation(){
+function addEducation(data={}){
 
 const div=document.createElement('div');
 
 div.className='section-box edu-item';
 
 div.innerHTML=
-'<input type="text" class="edu-school" placeholder="Universitas / Sekolah">'+
-'<input type="text" class="edu-major" placeholder="Jurusan">'+
-'<input type="text" class="edu-date" placeholder="2020 - 2024">';
+'<input type="text" class="edu-school" placeholder="Universitas / Sekolah" value="'+(data.school || '')+'">'+
+'<input type="text" class="edu-major" placeholder="Jurusan" value="'+(data.major || '')+'">'+
+'<input type="text" class="edu-date" placeholder="2020 - 2024" value="'+(data.date || '')+'">'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('educationContainer').appendChild(div);
 
@@ -345,13 +370,15 @@ updatePreview();
 
 }
 
-function addHardSkill(){
+function addHardSkill(value=''){
 
 const div=document.createElement('div');
 
 div.className='section-box';
 
-div.innerHTML='<input type="text" class="hard-skill" placeholder="Hard Skill">';
+div.innerHTML=
+'<input type="text" class="hard-skill" placeholder="Hard Skill" value="'+value+'">'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('hardSkillContainer').appendChild(div);
 
@@ -360,13 +387,15 @@ updatePreview();
 
 }
 
-function addSoftSkill(){
+function addSoftSkill(value=''){
 
 const div=document.createElement('div');
 
 div.className='section-box';
 
-div.innerHTML='<input type="text" class="soft-skill" placeholder="Soft Skill">';
+div.innerHTML=
+'<input type="text" class="soft-skill" placeholder="Soft Skill" value="'+value+'">'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('softSkillContainer').appendChild(div);
 
@@ -375,15 +404,16 @@ updatePreview();
 
 }
 
-function addCertificate(){
+function addCertificate(data={}){
 
 const div=document.createElement('div');
 
 div.className='section-box cert-item';
 
 div.innerHTML=
-'<input type="text" class="cert-name" placeholder="Nama Sertifikat">'+
-'<input type="text" class="cert-org" placeholder="Penerbit">';
+'<input type="text" class="cert-name" placeholder="Nama Sertifikat" value="'+(data.name || '')+'">'+
+'<input type="text" class="cert-org" placeholder="Penerbit" value="'+(data.org || '')+'">'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('certificateContainer').appendChild(div);
 
@@ -392,13 +422,15 @@ updatePreview();
 
 }
 
-function addLanguage(){
+function addLanguage(value=''){
 
 const div=document.createElement('div');
 
 div.className='section-box';
 
-div.innerHTML='<input type="text" class="language" placeholder="Bahasa & Level">';
+div.innerHTML=
+'<input type="text" class="language" placeholder="Bahasa & Level" value="'+value+'">'+
+'<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('languageContainer').appendChild(div);
 
@@ -418,47 +450,58 @@ document.getElementById('position').value,
 document.getElementById('positionLink').value
 );
 
+const email=linkHTML(
+document.getElementById('email').value,
+document.getElementById('emailLink').value
+);
+
+const phone1=linkHTML(
+document.getElementById('phone1').value,
+document.getElementById('phone1Link').value
+);
+
+const phone2=linkHTML(
+document.getElementById('phone2').value,
+document.getElementById('phone2Link').value
+);
+
+const linkedin=linkHTML(
+document.getElementById('linkedin').value,
+document.getElementById('linkedinLink').value
+);
+
+const portfolio=linkHTML(
+document.getElementById('portfolio').value,
+document.getElementById('portfolioLink').value
+);
+
+const location=document.getElementById('location').value;
+
+const phoneDisplay=[phone1,phone2]
+.filter(Boolean)
+.join(' / ');
+
 let contact='';
 
-contact += `
-<table style="border-collapse:collapse;line-height:1.8">
+if(email){
+contact += '<div class="contact-item"><strong>Email:</strong> '+email+'</div>';
+}
 
-<tr>
-<td style="width:110px"><strong>E-mail</strong></td>
-<td style="width:15px">:</td>
-<td>${linkHTML(document.getElementById('email').value, document.getElementById('emailLink').value)}</td>
-</tr>
+if(phoneDisplay){
+contact += '<div class="contact-item"><strong>Phone:</strong> '+phoneDisplay+'</div>';
+}
 
-<tr>
-<td><strong>NO HP</strong></td>
-<td>:</td>
-<td>
-${linkHTML(document.getElementById('phone1').value, document.getElementById('phone1Link').value)}
- /
-${linkHTML(document.getElementById('phone2').value, document.getElementById('phone2Link').value)}
-</td>
-</tr>
+if(linkedin){
+contact += '<div class="contact-item"><strong>LinkedIn:</strong> '+linkedin+'</div>';
+}
 
-<tr>
-<td><strong>LinkedIn</strong></td>
-<td>:</td>
-<td>${linkHTML(document.getElementById('linkedin').value, document.getElementById('linkedinLink').value)}</td>
-</tr>
+if(portfolio){
+contact += '<div class="contact-item"><strong>Portfolio:</strong> '+portfolio+'</div>';
+}
 
-<tr>
-<td><strong>Portfolio</strong></td>
-<td>:</td>
-<td>${linkHTML(document.getElementById('portfolio').value, document.getElementById('portfolioLink').value)}</td>
-</tr>
-
-<tr>
-<td><strong>Lokasi</strong></td>
-<td>:</td>
-<td>${document.getElementById('location').value}</td>
-</tr>
-
-</table>
-`;
+if(location){
+contact += '<div class="contact-item"><strong>Location:</strong> '+location+'</div>';
+}
 
 document.getElementById('p_contact').innerHTML=contact;
 
@@ -567,6 +610,117 @@ document.getElementById('p_languages').innerHTML=lang;
 
 }
 
+function getFormData(){
+
+return {
+
+name:document.getElementById('name').value,
+position:document.getElementById('position').value,
+positionLink:document.getElementById('positionLink').value,
+
+email:document.getElementById('email').value,
+emailLink:document.getElementById('emailLink').value,
+
+phone1:document.getElementById('phone1').value,
+phone1Link:document.getElementById('phone1Link').value,
+
+phone2:document.getElementById('phone2').value,
+phone2Link:document.getElementById('phone2Link').value,
+
+linkedin:document.getElementById('linkedin').value,
+linkedinLink:document.getElementById('linkedinLink').value,
+
+portfolio:document.getElementById('portfolio').value,
+portfolioLink:document.getElementById('portfolioLink').value,
+
+location:document.getElementById('location').value,
+summary:document.getElementById('summary').value,
+
+experience:[...document.querySelectorAll('.exp-item')].map(item=>({
+company:item.querySelector('.exp-company').value,
+role:item.querySelector('.exp-role').value,
+date:item.querySelector('.exp-date').value,
+desc:item.querySelector('.exp-desc').value
+})),
+
+education:[...document.querySelectorAll('.edu-item')].map(item=>({
+school:item.querySelector('.edu-school').value,
+major:item.querySelector('.edu-major').value,
+date:item.querySelector('.edu-date').value
+})),
+
+hardSkills:[...document.querySelectorAll('.hard-skill')].map(el=>el.value),
+
+softSkills:[...document.querySelectorAll('.soft-skill')].map(el=>el.value),
+
+certificates:[...document.querySelectorAll('.cert-item')].map(item=>({
+name:item.querySelector('.cert-name').value,
+org:item.querySelector('.cert-org').value
+})),
+
+languages:[...document.querySelectorAll('.language')].map(el=>el.value)
+
+};
+
+}
+
+function saveDraft(){
+
+localStorage.setItem(
+'cvATSModernBlue',
+JSON.stringify(getFormData())
+);
+
+}
+
+function loadDraft(){
+
+const saved=localStorage.getItem('cvATSModernBlue');
+
+if(!saved) return;
+
+const data=JSON.parse(saved);
+
+document.getElementById('name').value=data.name || '';
+document.getElementById('position').value=data.position || '';
+document.getElementById('positionLink').value=data.positionLink || '';
+
+document.getElementById('email').value=data.email || '';
+document.getElementById('emailLink').value=data.emailLink || '';
+
+document.getElementById('phone1').value=data.phone1 || '';
+document.getElementById('phone1Link').value=data.phone1Link || '';
+
+document.getElementById('phone2').value=data.phone2 || '';
+document.getElementById('phone2Link').value=data.phone2Link || '';
+
+document.getElementById('linkedin').value=data.linkedin || '';
+document.getElementById('linkedinLink').value=data.linkedinLink || '';
+
+document.getElementById('portfolio').value=data.portfolio || '';
+document.getElementById('portfolioLink').value=data.portfolioLink || '';
+
+document.getElementById('location').value=data.location || '';
+document.getElementById('summary').value=data.summary || '';
+
+document.getElementById('experienceContainer').innerHTML='';
+document.getElementById('educationContainer').innerHTML='';
+document.getElementById('hardSkillContainer').innerHTML='';
+document.getElementById('softSkillContainer').innerHTML='';
+document.getElementById('certificateContainer').innerHTML='';
+document.getElementById('languageContainer').innerHTML='';
+
+(data.experience || []).forEach(addExperience);
+(data.education || []).forEach(addEducation);
+(data.hardSkills || []).forEach(addHardSkill);
+(data.softSkills || []).forEach(addSoftSkill);
+(data.certificates || []).forEach(addCertificate);
+(data.languages || []).forEach(addLanguage);
+
+updatePreview();
+
+}
+
 function downloadPDF(){
 
 const element=document.getElementById('cvPreview');
@@ -587,9 +741,6 @@ jsPDF:{
 unit:'mm',
 format:'a4',
 orientation:'portrait'
-},
-pagebreak:{
-mode:['css','legacy']
 }
 };
 
@@ -602,44 +753,9 @@ html2pdf()
 
 function exportHTML(){
 
-const previewHTML=document.getElementById('cvPreview').outerHTML;
+const html=document.documentElement.outerHTML;
 
-const styles=document.querySelector('style').innerHTML;
-
-let exportPage='';
-
-exportPage += '<!DOCTYPE html>';
-exportPage += '<html lang="id">';
-exportPage += '<head>';
-exportPage += '<meta charset="UTF-8">';
-exportPage += '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-exportPage += '<title>CV ATS</title>';
-
-exportPage += '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"><\/script>';
-
-exportPage += '<style>'+styles+'</style>';
-
-exportPage += '</head>';
-
-exportPage += '<body style="padding:20px;background:#eef4ff">';
-
-exportPage += '<button onclick="downloadPDF()" style="max-width:220px;margin-bottom:20px">Download PDF</button>';
-
-exportPage += previewHTML;
-
-exportPage += '<script>';
-
-exportPage += 'function downloadPDF(){';
-exportPage += 'const element=document.getElementById("cvPreview");';
-exportPage += 'html2pdf().set({margin:[10,10,10,10],filename:"CV-ATS.pdf",image:{type:"jpeg",quality:1},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css","legacy"]}}).from(element).save();';
-exportPage += '}';
-
-exportPage += '<\/script>';
-
-exportPage += '</body>';
-exportPage += '</html>';
-
-const blob=new Blob([exportPage],{type:'text/html'});
+const blob=new Blob([html],{type:'text/html'});
 
 const url=URL.createObjectURL(blob);
 
@@ -662,20 +778,37 @@ URL.revokeObjectURL(url);
 
 function resetForm(){
 
-document.querySelectorAll('input, textarea').forEach(function(el){
-el.value='';
-});
+localStorage.removeItem('cvATSModernBlue');
 
-updatePreview();
+location.reload();
 
 }
 
+loadDraft();
+
+if(document.querySelectorAll('.exp-item').length===0){
 addExperience();
+}
+
+if(document.querySelectorAll('.edu-item').length===0){
 addEducation();
+}
+
+if(document.querySelectorAll('.hard-skill').length===0){
 addHardSkill();
+}
+
+if(document.querySelectorAll('.soft-skill').length===0){
 addSoftSkill();
+}
+
+if(document.querySelectorAll('.cert-item').length===0){
 addCertificate();
+}
+
+if(document.querySelectorAll('.language').length===0){
 addLanguage();
+}
 
 bindInputs();
 updatePreview();
