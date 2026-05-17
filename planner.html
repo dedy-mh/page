@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CV ATS</title><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script><style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef4ff;
+color:#111827;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:380px;
+background:#ffffff;
+padding:20px;
+overflow:auto;
+border-right:1px solid #cbd5e1;
+}
+
+.preview{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:12px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+box-sizing:border-box;
+font-size:14px;
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#1d4ed8;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+width:100%;
+transition:.2s;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+.add-btn{
+background:#2563eb;
+}
+
+.section-box{
+padding:12px;
+border:1px solid #dbeafe;
+border-radius:8px;
+margin-bottom:15px;
+background:#f8fbff;
+}
+
+.cv{
+background:#fff;
+max-width:850px;
+margin:auto;
+padding:35px;
+box-shadow:none;
+border-top:6px solid #1d4ed8;
+}
+
+.cv h1{
+margin-bottom:5px;
+font-size:34px;
+color:#1d4ed8;
+}
+
+.section{
+margin-top:24px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.section-title{
+font-size:18px;
+font-weight:bold;
+color:#1d4ed8;
+border-bottom:2px solid #1d4ed8;
+padding-bottom:5px;
+margin-bottom:10px;
+text-transform:uppercase;
+}
+
+.content{
+line-height:1.8;
+white-space:pre-line;
+text-align:justify;
+}
+
+.item{
+margin-bottom:16px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.item-title{
+font-weight:bold;
+font-size:16px;
+}
+
+.item-sub{
+font-size:14px;
+color:#4b5563;
+}
+
+ul{
+padding-left:20px;
+}
+
+a{
+text-decoration:none;
+color:#2563eb;
+word-break:break-word;
+}
+
+table{
+width:100%;
+}
+
+td{
+vertical-align:top;
+padding-bottom:4px;
+}
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+}
+
+</style></head><body style="padding:20px;background:#eef4ff"><button onclick="downloadPDF()" style="max-width:220px;margin-bottom:20px">Download PDF</button><div class="cv" id="cvPreview">
+
+<h1 id="p_name">Dedy Martin Hutagalung</h1>
+
+<div id="p_position"><a href="https://dedy-mh.github.io/page/planner" target="_blank">Planner</a></div>
+
+<br>
+
+<div id="p_contact">
+<table style="border-collapse:collapse;line-height:1.8">
+
+<tbody><tr>
+<td style="width:110px"><strong>E-mail</strong></td>
+<td style="width:15px">:</td>
+<td><a href="mailto:dedymartin12@gmail.com" target="_blank">dedymartin12@gmail.com</a></td>
+</tr>
+
+<tr>
+<td><strong>NO HP</strong></td>
+<td>:</td>
+<td>
+<a href="https://wa.me/6285668046961" target="_blank">+62 856 6804 6961</a>
+ /
+<a href="https://wa.me/6282162152833" target="_blank">+62 821 6215 2833</a>
+</td>
+</tr>
+
+<tr>
+<td><strong>LinkedIn</strong></td>
+<td>:</td>
+<td><a href="https://www.linkedin.com/in/dedy-martin-hutagalung" target="_blank">linkedin.com/in/dedy-martin-hutagalung</a></td>
+</tr>
+
+<tr>
+<td><strong>Portfolio</strong></td>
+<td>:</td>
+<td><a href="https://dedy-mh.github.io/page/portfolio" target="_blank">dedy-mh.github.io/page/portfolio</a></td>
+</tr>
+
+<tr>
+<td><strong>Lokasi</strong></td>
+<td>:</td>
+<td>Sagulung, Kota Batam, Kepulauan Riau</td>
+</tr>
+
+</tbody></table>
+</div>
+
+<div class="section">
+<div class="section-title">Professional Summary</div>
+<div class="content" id="p_summary">Detail-oriented individual with strong skills in Microsoft Excel, data processing, and administrative support. Capable of organizing reports, managing data accurately, and supporting planning and scheduling activities efficiently.</div>
+</div>
+
+<div class="section">
+<div class="section-title">Work Experience</div>
+<div id="p_experience"><div class="item"><div class="item-title">General Affairs Staff (Staff Bagian Umum) - Sekretariat DPRD Kabupaten</div><div class="item-sub">Jan 2022 – Jan 2026</div><div class="content"><ul><li>Handled general office administration and daily operational support tasks</li><li>Managed administrative documents, records, and filing systems in an organized manner</li><li>Performed data entry and prepared reports using Microsoft Word and Excel</li><li>Supported internal administrative activities and office operational needs</li><li>Coordinated with multiple departments to ensure smooth workflow and communication</li><li>Maintained accuracy, organization, and efficiency in office administration processes</li></ul></div></div><div class="item"><div class="item-title">CAD Designer &amp; Laser Cutting Operator - PT JS CORP Jakarta</div><div class="item-sub">Jun 2019 – Nov 2021</div><div class="content"><ul><li>Created technical drawings and production designs using AutoCAD</li><li>Operated laser cutting machines in accordance with operational and safety procedures</li><li>Ensured cutting results met required measurements, precision, and quality standards</li><li>Conducted design checking and verification before production processes</li><li>Collaborated with the production team to maintain workflow efficiency</li><li>Maintained attention to detail, accuracy, and workplace safety during operations</li></ul></div></div></div>
+</div>
+
+<div class="section">
+<div class="section-title">Education</div>
+<div id="p_education"><div class="item"><div class="item-title">Universitas Putera Batam</div><div>S1 Sistem Informasi</div><div class="item-sub">2014 - 2018</div></div></div>
+</div>
+
+<div class="section">
+<div class="section-title">Hard Skills</div>
+<ul id="p_hardskills"><li>Microsoft Excel (Formula &amp; Data Processing)</li><li>Data Entry &amp; Reporting</li><li>Spreadsheet Management</li><li>Planning &amp; Scheduling Support</li><li>Document Processing</li><li>Administrative Support</li><li>Basic Data Analysis</li></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Soft Skills</div>
+<ul id="p_softskills"><li>Analytical Thinking</li><li>Attention to Detail</li><li>Problem Solving</li><li>Time Management</li><li>Organizational Skills</li><li>Accuracy in Work</li></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Certifications &amp; Training</div>
+<div id="p_certificates"><div class="item"><div class="item-title">Cara Mudah Menggunakan Aplikasi Perkantoran Online (Micro Skill)</div><div>digitalent.komdigi.go.id</div></div><div class="item"><div class="item-title">Seni Public Speaking Untuk Pemimpin Muda Berkarakter (Micro Skill)</div><div>digitalent.komdigi.go.id</div></div></div>
+</div>
+
+<div class="section">
+<div class="section-title">Languages</div>
+<ul id="p_languages"><li>Indonesian – Native</li><li>English — Intermediate</li></ul>
+</div>
+
+</div><script>function downloadPDF(){const element=document.getElementById("cvPreview");html2pdf().set({margin:[10,10,10,10],filename:"CV-ATS.pdf",image:{type:"jpeg",quality:1},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css","legacy"]}}).from(element).save();}</script></body></html>
