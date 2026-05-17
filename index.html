@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Dedy Martin Hutagalung</title>
+<link rel="icon" href="favicon-dmh.svg" type="image/svg+xml">
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0f172a;
+color:#fff;
+}
+
+.header{
+padding:30px 20px;
+background:#111827;
+border-bottom:1px solid #1f2937;
+text-align:center;
+}
+
+.header h1{
+margin:0;
+font-size:24px;
+color:#60a5fa;
+letter-spacing:1px;
+}
+
+.header p{
+margin-top:8px;
+color:#94a3b8;
+font-size:13px;
+}
+
+.container{
+max-width:900px;
+margin:30px auto;
+padding:0 20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:14px;
+}
+
+.card{
+background:#1f2937;
+padding:16px;
+border-radius:12px;
+border:1px solid #374151;
+transition:all 0.25s ease;
+text-decoration:none;
+color:#fff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.card:hover{
+background:#2563eb;
+transform:translateY(-4px);
+box-shadow:0 10px 20px rgba(37,99,235,0.25);
+}
+
+.card.primary{
+border:1px solid #2563eb;
+box-shadow:0 0 18px rgba(37,99,235,0.35);
+}
+
+.title{
+font-size:15px;
+font-weight:bold;
+}
+
+.btn{
+font-size:12px;
+padding:6px 10px;
+background:#111827;
+border-radius:6px;
+color:#93c5fd;
+white-space:nowrap;
+}
+
+.card:hover .btn{
+background:#0b1220;
+}
+
+.desc{
+font-size:12px;
+color:#94a3b8;
+margin-top:6px;
+line-height:1.4;
+}
+
+.footer{
+text-align:center;
+margin-top:40px;
+color:#64748b;
+font-size:12px;
+padding-bottom:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>My Curriculum Vitae</h1>
+<p>Kumpulan CV berdasarkan bidang keahlian</p>
+</div>
+
+<div class="container">
+
+<div class="grid">
+
+<!-- MAIN PORTFOLIO (ONLY PRIMARY) -->
+<a class="card primary" href="portfolio.html" target="_blank">
+  <div>
+    <div class="title">My Portfolio</div>
+    <p class="desc">
+      Personal portfolio berisi profil, skill, project, dan pengalaman kerja di bidang IT Support, Web Development, dan Technical Support.
+    </p>
+  </div>
+  <div class="btn">Open</div>
+</a>
+
+<!-- IT SUPPORT -->
+<a class="card" href="it-support.html" target="_blank">
+  <div>
+    <div class="title">IT & Technical Support CV</div>
+    <p class="desc">
+      CV untuk IT Support, Helpdesk, troubleshooting komputer, dan basic networking.
+    </p>
+  </div>
+  <div class="btn">Open</div>
+</a>
+
+<!-- OFFICE -->
+<a class="card" href="office.html" target="_blank">
+  <div>
+    <div class="title">Office & Administration CV</div>
+    <p class="desc">
+      Data entry, administrasi kantor, Microsoft Word & Excel, dan pengolahan dokumen.
+    </p>
+  </div>
+  <div class="btn">Open</div>
+</a>
+
+<!-- WEB DEV -->
+<a class="card" href="web-dev.html" target="_blank">
+  <div>
+    <div class="title">Web Development CV</div>
+    <p class="desc">
+      HTML, CSS, JavaScript dasar, dan pembuatan website sederhana.
+    </p>
+  </div>
+  <div class="btn">Open</div>
+</a>
+
+<!-- TECHNICAL -->
+<a class="card" href="technical-ops.html" target="_blank">
+  <div>
+    <div class="title">Technical Operations CV</div>
+    <p class="desc">
+      AutoCAD, laser cutting, dan technical production support.
+    </p>
+  </div>
+  <div class="btn">Open</div>
+</a>
+
+<!-- COMING SOON -->
+<div class="card" style="opacity:0.5; cursor:not-allowed;">
+  <div>
+    <div class="title">Coming Soon</div>
+    <p class="desc">More CV categories will be added soon.</p>
+  </div>
+  <div class="btn">Soon</div>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 My Curriculum Vitae • Dedy Martin Hutagalung
+</div>
+
+</div>
+
+</body>
+</html>

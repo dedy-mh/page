@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATS CV Builder 2026 - Modern Blue</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef4ff;
+color:#111827;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:380px;
+background:#ffffff;
+padding:20px;
+overflow:auto;
+border-right:1px solid #cbd5e1;
+}
+
+.preview{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:12px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+box-sizing:border-box;
+font-size:14px;
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#1d4ed8;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+width:100%;
+transition:.2s;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+.add-btn{
+background:#2563eb;
+}
+
+.section-box{
+padding:12px;
+border:1px solid #dbeafe;
+border-radius:8px;
+margin-bottom:15px;
+background:#f8fbff;
+}
+
+.cv{
+background:#fff;
+max-width:850px;
+margin:auto;
+padding:35px;
+box-shadow:none;
+border-top:6px solid #1d4ed8;
+}
+
+.cv h1{
+margin-bottom:5px;
+font-size:34px;
+color:#1d4ed8;
+}
+
+.section{
+margin-top:24px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.section-title{
+font-size:18px;
+font-weight:bold;
+color:#1d4ed8;
+border-bottom:2px solid #1d4ed8;
+padding-bottom:5px;
+margin-bottom:10px;
+text-transform:uppercase;
+}
+
+.content{
+line-height:1.8;
+white-space:pre-line;
+text-align:justify;
+}
+
+.item{
+margin-bottom:16px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.item-title{
+font-weight:bold;
+font-size:16px;
+}
+
+.item-sub{
+font-size:14px;
+color:#4b5563;
+}
+
+ul{
+padding-left:20px;
+}
+
+a{
+text-decoration:none;
+color:#2563eb;
+word-break:break-word;
+}
+
+table{
+width:100%;
+}
+
+td{
+vertical-align:top;
+padding-bottom:4px;
+}
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>ATS CV Builder 2026</h2>
+
+<input type="text" id="name" placeholder="Nama Lengkap">
+
+<input type="text" id="position" placeholder="Posisi / Jabatan">
+<input type="text" id="positionLink" placeholder="Link posisi / perusahaan">
+
+<input type="email" id="email" placeholder="Email">
+<input type="text" id="emailLink" placeholder="mailto:email@gmail.com">
+
+<input type="text" id="phone1" placeholder="Nomor HP 1">
+<input type="text" id="phone1Link" placeholder="https://wa.me/...">
+
+<input type="text" id="phone2" placeholder="Nomor HP 2">
+<input type="text" id="phone2Link" placeholder="https://wa.me/...">
+
+<input type="text" id="linkedin" placeholder="LinkedIn">
+<input type="text" id="linkedinLink" placeholder="https://linkedin.com/in/...">
+
+<input type="text" id="portfolio" placeholder="Portfolio">
+<input type="text" id="portfolioLink" placeholder="https://portfolio.com">
+
+<input type="text" id="location" placeholder="Lokasi">
+
+<textarea id="summary" placeholder="Professional Summary"></textarea>
+
+<h3>Pengalaman Kerja</h3>
+<div id="experienceContainer"></div>
+<button class="add-btn" onclick="addExperience()">+ Tambah Pengalaman</button>
+
+<h3>Pendidikan</h3>
+<div id="educationContainer"></div>
+<button class="add-btn" onclick="addEducation()">+ Tambah Pendidikan</button>
+
+<h3>Hard Skill</h3>
+<div id="hardSkillContainer"></div>
+<button class="add-btn" onclick="addHardSkill()">+ Tambah Hard Skill</button>
+
+<h3>Soft Skill</h3>
+<div id="softSkillContainer"></div>
+<button class="add-btn" onclick="addSoftSkill()">+ Tambah Soft Skill</button>
+
+<h3>Sertifikat / Pelatihan</h3>
+<div id="certificateContainer"></div>
+<button class="add-btn" onclick="addCertificate()">+ Tambah Sertifikat</button>
+
+<h3>Bahasa</h3>
+<div id="languageContainer"></div>
+<button class="add-btn" onclick="addLanguage()">+ Tambah Bahasa</button>
+
+<hr>
+
+<button onclick="downloadPDF()">Export PDF</button>
+<button onclick="exportHTML()">Export HTML</button>
+<button onclick="resetForm()">Reset</button>
+
+</div>
+
+<div class="preview">
+
+<div class="cv" id="cvPreview">
+
+<h1 id="p_name">Nama Lengkap</h1>
+
+<div id="p_position"></div>
+
+<br>
+
+<div id="p_contact"></div>
+
+<div class="section">
+<div class="section-title">Professional Summary</div>
+<div class="content" id="p_summary"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Work Experience</div>
+<div id="p_experience"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Education</div>
+<div id="p_education"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Hard Skills</div>
+<ul id="p_hardskills"></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Soft Skills</div>
+<ul id="p_softskills"></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Certifications & Training</div>
+<div id="p_certificates"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Languages</div>
+<ul id="p_languages"></ul>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+function linkHTML(text, link){
+
+if(!text) return '';
+
+if(!link) return text;
+
+return '<a href="'+link+'" target="_blank">'+text+'</a>';
+
+}
+
+function bindInputs(){
+
+const elements=document.querySelectorAll('input, textarea');
+
+elements.forEach(function(el){
+
+el.removeEventListener('input', updatePreview);
+el.addEventListener('input', updatePreview);
+
+});
+
+}
+
+function addExperience(){
+
+const div=document.createElement('div');
+
+div.className='section-box exp-item';
+
+div.innerHTML=
+'<input type="text" class="exp-company" placeholder="Nama Perusahaan">'+
+'<input type="text" class="exp-role" placeholder="Posisi">'+
+'<input type="text" class="exp-date" placeholder="Jan 2024 - Mar 2026">'+
+'<textarea class="exp-desc" placeholder="Tugas pekerjaan (1 baris = 1 bullet point)"></textarea>';
+
+document.getElementById('experienceContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function addEducation(){
+
+const div=document.createElement('div');
+
+div.className='section-box edu-item';
+
+div.innerHTML=
+'<input type="text" class="edu-school" placeholder="Universitas / Sekolah">'+
+'<input type="text" class="edu-major" placeholder="Jurusan">'+
+'<input type="text" class="edu-date" placeholder="2020 - 2024">';
+
+document.getElementById('educationContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function addHardSkill(){
+
+const div=document.createElement('div');
+
+div.className='section-box';
+
+div.innerHTML='<input type="text" class="hard-skill" placeholder="Hard Skill">';
+
+document.getElementById('hardSkillContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function addSoftSkill(){
+
+const div=document.createElement('div');
+
+div.className='section-box';
+
+div.innerHTML='<input type="text" class="soft-skill" placeholder="Soft Skill">';
+
+document.getElementById('softSkillContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function addCertificate(){
+
+const div=document.createElement('div');
+
+div.className='section-box cert-item';
+
+div.innerHTML=
+'<input type="text" class="cert-name" placeholder="Nama Sertifikat">'+
+'<input type="text" class="cert-org" placeholder="Penerbit">';
+
+document.getElementById('certificateContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function addLanguage(){
+
+const div=document.createElement('div');
+
+div.className='section-box';
+
+div.innerHTML='<input type="text" class="language" placeholder="Bahasa & Level">';
+
+document.getElementById('languageContainer').appendChild(div);
+
+bindInputs();
+updatePreview();
+
+}
+
+function updatePreview(){
+
+document.getElementById('p_name').innerText=
+document.getElementById('name').value || 'Nama Lengkap';
+
+document.getElementById('p_position').innerHTML=
+linkHTML(
+document.getElementById('position').value,
+document.getElementById('positionLink').value
+);
+
+let contact='';
+
+contact += `
+<table style="border-collapse:collapse;line-height:1.8">
+
+<tr>
+<td style="width:110px"><strong>E-mail</strong></td>
+<td style="width:15px">:</td>
+<td>${linkHTML(document.getElementById('email').value, document.getElementById('emailLink').value)}</td>
+</tr>
+
+<tr>
+<td><strong>NO HP</strong></td>
+<td>:</td>
+<td>
+${linkHTML(document.getElementById('phone1').value, document.getElementById('phone1Link').value)}
+ /
+${linkHTML(document.getElementById('phone2').value, document.getElementById('phone2Link').value)}
+</td>
+</tr>
+
+<tr>
+<td><strong>LinkedIn</strong></td>
+<td>:</td>
+<td>${linkHTML(document.getElementById('linkedin').value, document.getElementById('linkedinLink').value)}</td>
+</tr>
+
+<tr>
+<td><strong>Portfolio</strong></td>
+<td>:</td>
+<td>${linkHTML(document.getElementById('portfolio').value, document.getElementById('portfolioLink').value)}</td>
+</tr>
+
+<tr>
+<td><strong>Lokasi</strong></td>
+<td>:</td>
+<td>${document.getElementById('location').value}</td>
+</tr>
+
+</table>
+`;
+
+document.getElementById('p_contact').innerHTML=contact;
+
+document.getElementById('p_summary').innerText=
+document.getElementById('summary').value;
+
+let expHTML='';
+
+document.querySelectorAll('.exp-item').forEach(function(item){
+
+const company=item.querySelector('.exp-company').value;
+const role=item.querySelector('.exp-role').value;
+const date=item.querySelector('.exp-date').value;
+const desc=item.querySelector('.exp-desc').value;
+
+expHTML +=
+'<div class="item">'+
+'<div class="item-title">'+role+' - '+company+'</div>'+
+'<div class="item-sub">'+date+'</div>'+
+'<div class="content"><ul>' +
+
+desc.split('\n').map(function(item){
+return item.trim() ? '<li>'+item+'</li>' : '';
+}).join('')
+
++
+
+'</ul></div>'+
+'</div>';
+
+});
+
+document.getElementById('p_experience').innerHTML=expHTML;
+
+let eduHTML='';
+
+document.querySelectorAll('.edu-item').forEach(function(item){
+
+const school=item.querySelector('.edu-school').value;
+const major=item.querySelector('.edu-major').value;
+const date=item.querySelector('.edu-date').value;
+
+eduHTML +=
+'<div class="item">'+
+'<div class="item-title">'+school+'</div>'+
+'<div>'+major+'</div>'+
+'<div class="item-sub">'+date+'</div>'+
+'</div>';
+
+});
+
+document.getElementById('p_education').innerHTML=eduHTML;
+
+let hard='';
+
+document.querySelectorAll('.hard-skill').forEach(function(el){
+
+if(el.value){
+hard += '<li>'+el.value+'</li>';
+}
+
+});
+
+document.getElementById('p_hardskills').innerHTML=hard;
+
+let soft='';
+
+document.querySelectorAll('.soft-skill').forEach(function(el){
+
+if(el.value){
+soft += '<li>'+el.value+'</li>';
+}
+
+});
+
+document.getElementById('p_softskills').innerHTML=soft;
+
+let cert='';
+
+document.querySelectorAll('.cert-item').forEach(function(item){
+
+const name=item.querySelector('.cert-name').value;
+const org=item.querySelector('.cert-org').value;
+
+cert +=
+'<div class="item">'+
+'<div class="item-title">'+name+'</div>'+
+'<div>'+org+'</div>'+
+'</div>';
+
+});
+
+document.getElementById('p_certificates').innerHTML=cert;
+
+let lang='';
+
+document.querySelectorAll('.language').forEach(function(el){
+
+if(el.value){
+lang += '<li>'+el.value+'</li>';
+}
+
+});
+
+document.getElementById('p_languages').innerHTML=lang;
+
+}
+
+function downloadPDF(){
+
+const element=document.getElementById('cvPreview');
+
+const opt={
+margin:[10,10,10,10],
+filename:'CV-ATS.pdf',
+image:{
+type:'jpeg',
+quality:1
+},
+html2canvas:{
+scale:2,
+useCORS:true,
+scrollY:0
+},
+jsPDF:{
+unit:'mm',
+format:'a4',
+orientation:'portrait'
+},
+pagebreak:{
+mode:['css','legacy']
+}
+};
+
+html2pdf()
+.set(opt)
+.from(element)
+.save();
+
+}
+
+function exportHTML(){
+
+const previewHTML=document.getElementById('cvPreview').outerHTML;
+
+const styles=document.querySelector('style').innerHTML;
+
+let exportPage='';
+
+exportPage += '<!DOCTYPE html>';
+exportPage += '<html lang="id">';
+exportPage += '<head>';
+exportPage += '<meta charset="UTF-8">';
+exportPage += '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+exportPage += '<title>CV ATS</title>';
+
+exportPage += '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"><\/script>';
+
+exportPage += '<style>'+styles+'</style>';
+
+exportPage += '</head>';
+
+exportPage += '<body style="padding:20px;background:#eef4ff">';
+
+exportPage += '<button onclick="downloadPDF()" style="max-width:220px;margin-bottom:20px">Download PDF</button>';
+
+exportPage += previewHTML;
+
+exportPage += '<script>';
+
+exportPage += 'function downloadPDF(){';
+exportPage += 'const element=document.getElementById("cvPreview");';
+exportPage += 'html2pdf().set({margin:[10,10,10,10],filename:"CV-ATS.pdf",image:{type:"jpeg",quality:1},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css","legacy"]}}).from(element).save();';
+exportPage += '}';
+
+exportPage += '<\/script>';
+
+exportPage += '</body>';
+exportPage += '</html>';
+
+const blob=new Blob([exportPage],{type:'text/html'});
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement('a');
+
+a.href=url;
+a.download='CV-ATS-Modern-Blue.html';
+
+document.body.appendChild(a);
+
+a.click();
+
+document.body.removeChild(a);
+
+setTimeout(function(){
+URL.revokeObjectURL(url);
+},1000);
+
+}
+
+function resetForm(){
+
+document.querySelectorAll('input, textarea').forEach(function(el){
+el.value='';
+});
+
+updatePreview();
+
+}
+
+addExperience();
+addEducation();
+addHardSkill();
+addSoftSkill();
+addCertificate();
+addLanguage();
+
+bindInputs();
+updatePreview();
+
+</script>
+
+</body>
+</html>
