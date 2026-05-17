@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make CV Dedy Martin Hutagalung</title>
+
+<link rel="icon" href="favicon-dmh.svg" type="image/svg+xml">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef4ff;
+color:#111827;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:380px;
+background:#ffffff;
+padding:20px;
+overflow:auto;
+border-right:1px solid #cbd5e1;
+}
+
+.preview{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:12px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+box-sizing:border-box;
+font-size:14px;
+}
+
+textarea{
+min-height:90px;
+resize:vertical;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#1d4ed8;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+width:100%;
+transition:.2s;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+.add-btn{
+background:#2563eb;
+}
+
+.remove-btn{
+background:#dc2626;
+margin-top:5px;
+}
+
+.remove-btn:hover{
+background:#b91c1c;
+}
+
+.section-box{
+padding:12px;
+border:1px solid #dbeafe;
+border-radius:8px;
+margin-bottom:15px;
+background:#f8fbff;
+}
+
+.cv{
+background:#fff;
+max-width:850px;
+margin:auto;
+padding:35px;
+border-top:6px solid #1d4ed8;
+}
+
+.cv h1{
+margin-bottom:5px;
+font-size:34px;
+color:#1d4ed8;
+}
+
+.section{
+margin-top:24px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.section-title{
+font-size:18px;
+font-weight:bold;
+color:#1d4ed8;
+border-bottom:2px solid #1d4ed8;
+padding-bottom:5px;
+margin-bottom:10px;
+text-transform:uppercase;
+}
+
+.content{
+line-height:1.8;
+white-space:pre-line;
+text-align:justify;
+}
+
+.item{
+margin-bottom:16px;
+page-break-inside:avoid;
+break-inside:avoid;
+}
+
+.item-title{
+font-weight:bold;
+font-size:16px;
+}
+
+.item-sub{
+font-size:14px;
+color:#4b5563;
+}
+
+ul{
+padding-left:20px;
+}
+
+a{
+text-decoration:none;
+color:#2563eb;
+word-break:break-word;
+}
+
+.contact-item{
+margin-bottom:6px;
+line-height:1.7;
+word-break:break-word;
+}
+
+/* POPUP */
+.popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.popup-box{
+background:#fff;
+padding:25px;
+border-radius:12px;
+max-width:350px;
+width:90%;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+animation:pop .2s ease;
+}
+
+.popup-box h2{
+margin-top:0;
+color:#1d4ed8;
+}
+
+.popup-box button{
+margin-top:15px;
+background:#1d4ed8;
+}
+
+@keyframes pop{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+@media(max-width:900px){
+.container{
+flex-direction:column;
+}
+.sidebar{
+width:100%;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+  <div class="popup-box">
+    <h2>Fitur Tidak Tersedia</h2>
+    <p>
+      Fitur ini telah dinonaktifkan karena aplikasi hanya untuk preview.
+      <br><br>
+      <strong>Dedy Martin Hutagalung</strong>
+    </p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>ATS CV Builder 2026</h2>
+
+<input type="text" id="name" placeholder="Nama Lengkap">
+
+<input type="text" id="position" placeholder="Posisi / Jabatan">
+<input type="text" id="positionLink" placeholder="Link posisi / perusahaan">
+
+<input type="email" id="email" placeholder="Email">
+<input type="text" id="emailLink" placeholder="mailto:email@gmail.com">
+
+<input type="text" id="phone1" placeholder="Nomor HP 1">
+<input type="text" id="phone1Link" placeholder="https://wa.me/...">
+
+<input type="text" id="phone2" placeholder="Nomor HP 2">
+<input type="text" id="phone2Link" placeholder="https://wa.me/...">
+
+<input type="text" id="linkedin" placeholder="LinkedIn">
+<input type="text" id="linkedinLink" placeholder="https://linkedin.com/in/...">
+
+<input type="text" id="portfolio" placeholder="Portfolio">
+<input type="text" id="portfolioLink" placeholder="https://portfolio.com">
+
+<input type="text" id="location" placeholder="Lokasi">
+
+<textarea id="summary" placeholder="Professional Summary"></textarea>
+
+<h3>Pengalaman Kerja</h3>
+<div id="experienceContainer"></div>
+<button class="add-btn" onclick="addExperience()">+ Tambah Pengalaman</button>
+
+<h3>Pendidikan</h3>
+<div id="educationContainer"></div>
+<button class="add-btn" onclick="addEducation()">+ Tambah Pendidikan</button>
+
+<h3>Hard Skill</h3>
+<div id="hardSkillContainer"></div>
+<button class="add-btn" onclick="addHardSkill()">+ Tambah Hard Skill</button>
+
+<h3>Soft Skill</h3>
+<div id="softSkillContainer"></div>
+<button class="add-btn" onclick="addSoftSkill()">+ Tambah Soft Skill</button>
+
+<h3>Sertifikat / Pelatihan</h3>
+<div id="certificateContainer"></div>
+<button class="add-btn" onclick="addCertificate()">+ Tambah Sertifikat</button>
+
+<h3>Bahasa</h3>
+<div id="languageContainer"></div>
+<button class="add-btn" onclick="addLanguage()">+ Tambah Bahasa</button>
+
+<hr>
+
+<button onclick="blockedPDF()">Export PDF</button>
+<button onclick="resetForm()">Reset</button>
+
+</div>
+
+<div class="preview">
+
+<div class="cv" id="cvPreview">
+
+<h1 id="p_name">Nama Lengkap</h1>
+<div id="p_position"></div>
+
+<br>
+
+<div id="p_contact"></div>
+
+<div class="section">
+<div class="section-title">Professional Summary</div>
+<div class="content" id="p_summary"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Work Experience</div>
+<div id="p_experience"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Education</div>
+<div id="p_education"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Hard Skills</div>
+<ul id="p_hardskills"></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Soft Skills</div>
+<ul id="p_softskills"></ul>
+</div>
+
+<div class="section">
+<div class="section-title">Certifications & Training</div>
+<div id="p_certificates"></div>
+</div>
+
+<div class="section">
+<div class="section-title">Languages</div>
+<ul id="p_languages"></ul>
+</div>
+
+</div>
+</div>
+
+<script>
+
+function linkHTML(text, link){
+if(!text) return '';
+if(!link) return text;
+return '<a href="'+link+'" target="_blank">'+text+'</a>';
+}
+
+function addExperience(){
+const div=document.createElement('div');
+div.className='section-box exp-item';
+div.innerHTML=
+'<input class="exp-company" placeholder="Nama Perusahaan">'+
+'<input class="exp-role" placeholder="Posisi">'+
+'<input class="exp-date" placeholder="Tanggal">'+
+'<textarea class="exp-desc" placeholder="Deskripsi"></textarea>'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('experienceContainer').appendChild(div);
+}
+
+function addEducation(){
+const div=document.createElement('div');
+div.className='section-box edu-item';
+div.innerHTML=
+'<input class="edu-school" placeholder="Sekolah">'+
+'<input class="edu-major" placeholder="Jurusan">'+
+'<input class="edu-date" placeholder="Tahun">'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('educationContainer').appendChild(div);
+}
+
+function addHardSkill(){
+const div=document.createElement('div');
+div.className='section-box';
+div.innerHTML=
+'<input class="hard-skill" placeholder="Hard Skill">'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('hardSkillContainer').appendChild(div);
+}
+
+function addSoftSkill(){
+const div=document.createElement('div');
+div.className='section-box';
+div.innerHTML=
+'<input class="soft-skill" placeholder="Soft Skill">'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('softSkillContainer').appendChild(div);
+}
+
+function addCertificate(){
+const div=document.createElement('div');
+div.className='section-box';
+div.innerHTML=
+'<input class="cert-name" placeholder="Nama Sertifikat">'+
+'<input class="cert-org" placeholder="Penerbit">'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('certificateContainer').appendChild(div);
+}
+
+function addLanguage(){
+const div=document.createElement('div');
+div.className='section-box';
+div.innerHTML=
+'<input class="language" placeholder="Bahasa">'+
+'<button class="remove-btn" onclick="this.parentElement.remove()">Hapus</button>';
+document.getElementById('languageContainer').appendChild(div);
+}
+
+function blockedPDF(){
+document.getElementById('popup').style.display='flex';
+}
+
+function closePopup(){
+document.getElementById('popup').style.display='none';
+}
+
+function updatePreview(){
+document.getElementById('p_name').innerText =
+document.getElementById('name').value || 'Nama Lengkap';
+}
+
+function resetForm(){
+location.reload();
+}
+
+addExperience();
+addEducation();
+addHardSkill();
+addSoftSkill();
+addCertificate();
+addLanguage();
+
+</script>
+
+</body>
+</html>

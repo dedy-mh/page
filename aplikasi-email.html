@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Email Application Builder 2026 - Modern Blue</title>
+
+<link rel="icon" href="favicon-dmh.svg" type="image/svg+xml">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef4ff;
+color:#111827;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:380px;
+background:#ffffff;
+padding:20px;
+overflow:auto;
+border-right:1px solid #cbd5e1;
+}
+
+.preview{
+flex:1;
+padding:20px;
+overflow:auto;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:12px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+box-sizing:border-box;
+font-size:14px;
+}
+
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#1d4ed8;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+margin-bottom:10px;
+width:100%;
+transition:.2s;
+}
+
+button:hover{
+background:#1e40af;
+}
+
+.email-card{
+background:#fff;
+max-width:850px;
+margin:auto;
+padding:35px;
+border-top:6px solid #1d4ed8;
+}
+
+.title{
+font-size:32px;
+font-weight:bold;
+color:#1d4ed8;
+margin-bottom:8px;
+}
+
+.section{
+margin-top:24px;
+}
+
+.section-title{
+font-size:18px;
+font-weight:bold;
+color:#1d4ed8;
+border-bottom:2px solid #1d4ed8;
+padding-bottom:5px;
+margin-bottom:12px;
+text-transform:uppercase;
+}
+
+.box{
+background:#f8fbff;
+padding:15px;
+border:1px solid #dbeafe;
+border-radius:8px;
+line-height:1.8;
+white-space:pre-line;
+word-break:break-word;
+}
+
+.subject{
+font-weight:bold;
+font-size:16px;
+}
+
+a{
+text-decoration:none;
+color:#2563eb;
+word-break:break-word;
+}
+
+.label{
+font-weight:bold;
+margin-bottom:5px;
+display:block;
+}
+
+#toast{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111827;
+color:#fff;
+padding:12px 18px;
+border-radius:8px;
+opacity:0;
+transition:.3s;
+pointer-events:none;
+z-index:999;
+}
+
+#toast.show{
+opacity:1;
+}
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="toast">Copied successfully!</div>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>Email Application Builder</h2>
+
+<label class="label">Template Language</label>
+
+<select id="languageMode">
+<option value="en">English</option>
+<option value="id">Indonesia</option>
+</select>
+
+<label class="label">Email Tujuan</label>
+<input type="email" id="targetEmail" placeholder="recruitment@company.com">
+
+<label class="label">Nama Lengkap</label>
+<input type="text" id="fullname" placeholder="Dedy Martin Hutagalung">
+
+<label class="label">Posisi</label>
+<input type="text" id="position" placeholder="Frontend Developer">
+
+<label class="label">Link Posisi</label>
+<input type="text" id="positionLink" placeholder="https://company.com/job">
+
+<label class="label">Nama Perusahaan</label>
+<input type="text" id="company" placeholder="PT Company">
+
+<label class="label">Link Perusahaan</label>
+<input type="text" id="companyLink" placeholder="https://company.com">
+
+<label class="label">Nama CV</label>
+<input type="text" id="cvname" placeholder="CV_Dedy.pdf">
+
+<label class="label">Link CV</label>
+<input type="text" id="cvLink" placeholder="https://drive.google.com/...">
+
+<label class="label">Nomor HP 1</label>
+<input type="text" id="phone1" placeholder="0856 6804 6961">
+
+<label class="label">Link HP 1</label>
+<input type="text" id="phone1Link" placeholder="https://wa.me/...">
+
+<label class="label">Nomor HP 2</label>
+<input type="text" id="phone2" placeholder="0821 6215 2833">
+
+<label class="label">Link HP 2</label>
+<input type="text" id="phone2Link" placeholder="https://wa.me/...">
+
+<button onclick="copyEmail()">Copy Rich Email</button>
+
+<button onclick="copyPlainText()">Copy Plain Text</button>
+
+<button onclick="openEmail()">Open Email App</button>
+
+<button onclick="resetForm()">Reset</button>
+
+</div>
+
+<div class="preview">
+
+<div class="email-card" id="emailPreview">
+
+<div class="title">Professional Email Application</div>
+
+<div class="section">
+
+<div class="section-title">Email Tujuan</div>
+
+<div class="box">
+<a id="p_targetEmail" href="#">
+recruitment@company.com
+</a>
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">Subject</div>
+
+<div class="box subject" id="p_subject">
+Application for Frontend Developer - Dedy Martin Hutagalung
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">Body Email</div>
+
+<div class="box" id="p_body"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function escapeHTML(str){
+
+if(!str) return '';
+
+return str
+.replace(/&/g,'&amp;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#039;');
+
+}
+
+function linkHTML(text, link){
+
+text=escapeHTML(text);
+link=escapeHTML(link);
+
+if(!text) return '';
+
+if(!link) return text;
+
+return '<a href="'+link+'" target="_blank">'+text+'</a>';
+
+}
+
+function showToast(message='Copied successfully!'){
+
+const toast=document.getElementById('toast');
+
+toast.innerText=message;
+
+toast.classList.add('show');
+
+setTimeout(function(){
+
+toast.classList.remove('show');
+
+},2000);
+
+}
+
+function updatePreview(){
+
+const language=document.getElementById('languageMode').value;
+
+const fullname=escapeHTML(
+document.getElementById('fullname').value
+);
+
+const position=document.getElementById('position').value;
+
+const positionLink=document.getElementById('positionLink').value;
+
+const company=document.getElementById('company').value;
+
+const companyLink=document.getElementById('companyLink').value;
+
+const targetEmail=document.getElementById('targetEmail').value;
+
+const cvname=document.getElementById('cvname').value;
+
+const cvLink=document.getElementById('cvLink').value;
+
+const phone1=document.getElementById('phone1').value;
+
+const phone1Link=document.getElementById('phone1Link').value;
+
+const phone2=document.getElementById('phone2').value;
+
+const phone2Link=document.getElementById('phone2Link').value;
+
+document.getElementById('p_targetEmail').innerHTML=
+linkHTML(targetEmail,'mailto:'+targetEmail);
+
+document.getElementById('p_subject').innerText=
+'Application for ' + position + ' - ' + fullname;
+
+const phones=[
+linkHTML(phone1,phone1Link),
+linkHTML(phone2,phone2Link)
+]
+.filter(Boolean)
+.join(' / ');
+
+let body='';
+
+if(language==='en'){
+
+body += 'Dear Recruitment Team,<br><br>';
+
+body += 'I would like to express my interest in applying for the ';
+
+body += linkHTML(position,positionLink);
+
+body += ' position at ';
+
+body += linkHTML(company,companyLink);
+
+body += '.<br><br>';
+
+body += 'Please find my attached ';
+
+body += linkHTML(cvname,cvLink);
+
+body += ' for your review and consideration. ';
+
+body += 'I am eager to learn, enhance my skills, and contribute positively to your company.<br><br>';
+
+body += 'Thank you for your time and consideration. ';
+body += 'I look forward to the opportunity to discuss my qualifications further.<br><br>';
+
+body += 'Best regards,<br>';
+
+body += fullname + '<br>';
+
+body += phones;
+
+}else{
+
+body += 'Kepada Tim Rekrutmen,<br><br>';
+
+body += 'Saya ingin mengajukan lamaran untuk posisi ';
+
+body += linkHTML(position,positionLink);
+
+body += ' di ';
+
+body += linkHTML(company,companyLink);
+
+body += '.<br><br>';
+
+body += 'Bersama email ini saya melampirkan ';
+
+body += linkHTML(cvname,cvLink);
+
+body += ' sebagai bahan pertimbangan. ';
+
+body += 'Saya memiliki semangat belajar yang tinggi dan siap memberikan kontribusi terbaik untuk perusahaan.<br><br>';
+
+body += 'Terima kasih atas waktu dan perhatian yang diberikan. ';
+body += 'Saya berharap dapat diberikan kesempatan untuk mengikuti tahap selanjutnya.<br><br>';
+
+body += 'Hormat saya,<br>';
+
+body += fullname + '<br>';
+
+body += phones;
+
+}
+
+document.getElementById('p_body').innerHTML=body;
+
+}
+
+function copyEmail(){
+
+const subject=document.getElementById('p_subject').innerText;
+
+const body=document.getElementById('p_body').innerText;
+
+const finalText=
+'Subject: ' + subject + '\n\n' + body;
+
+navigator.clipboard.writeText(finalText);
+
+showToast('Rich email copied!');
+
+}
+
+function copyPlainText(){
+
+const subject=document.getElementById('p_subject').innerText;
+
+const body=document.getElementById('p_body').innerText;
+
+const finalText=
+subject + '\n\n' + body;
+
+navigator.clipboard.writeText(finalText);
+
+showToast('Plain text copied!');
+
+}
+
+function openEmail(){
+
+const targetEmail=document.getElementById('targetEmail').value;
+
+if(!targetEmail){
+
+alert('Email tujuan wajib diisi');
+return;
+
+}
+
+const subject=document.getElementById('p_subject').innerText;
+
+const body=document.getElementById('p_body').innerText;
+
+const mailto=
+'mailto:' + targetEmail +
+'?subject=' + encodeURIComponent(subject) +
+'&body=' + encodeURIComponent(body);
+
+window.location.href=mailto;
+
+}
+
+function saveToLocalStorage(){
+
+const data={
+
+languageMode:document.getElementById('languageMode').value,
+
+targetEmail:document.getElementById('targetEmail').value,
+
+fullname:document.getElementById('fullname').value,
+
+position:document.getElementById('position').value,
+
+positionLink:document.getElementById('positionLink').value,
+
+company:document.getElementById('company').value,
+
+companyLink:document.getElementById('companyLink').value,
+
+cvname:document.getElementById('cvname').value,
+
+cvLink:document.getElementById('cvLink').value,
+
+phone1:document.getElementById('phone1').value,
+
+phone1Link:document.getElementById('phone1Link').value,
+
+phone2:document.getElementById('phone2').value,
+
+phone2Link:document.getElementById('phone2Link').value
+
+};
+
+localStorage.setItem(
+'emailApplicationBuilder2026',
+JSON.stringify(data)
+);
+
+}
+
+function loadFromLocalStorage(){
+
+const savedData=localStorage.getItem('emailApplicationBuilder2026');
+
+if(!savedData) return;
+
+const data=JSON.parse(savedData);
+
+document.getElementById('languageMode').value=data.languageMode || 'en';
+
+document.getElementById('targetEmail').value=data.targetEmail || '';
+
+document.getElementById('fullname').value=data.fullname || '';
+
+document.getElementById('position').value=data.position || '';
+
+document.getElementById('positionLink').value=data.positionLink || '';
+
+document.getElementById('company').value=data.company || '';
+
+document.getElementById('companyLink').value=data.companyLink || '';
+
+document.getElementById('cvname').value=data.cvname || '';
+
+document.getElementById('cvLink').value=data.cvLink || '';
+
+document.getElementById('phone1').value=data.phone1 || '';
+
+document.getElementById('phone1Link').value=data.phone1Link || '';
+
+document.getElementById('phone2').value=data.phone2 || '';
+
+document.getElementById('phone2Link').value=data.phone2Link || '';
+
+updatePreview();
+
+}
+
+function resetForm(){
+
+document.querySelectorAll('input').forEach(function(el){
+
+el.value='';
+
+});
+
+document.getElementById('languageMode').value='en';
+
+localStorage.removeItem('emailApplicationBuilder2026');
+
+updatePreview();
+
+}
+
+document.querySelectorAll('input, select').forEach(function(el){
+
+el.addEventListener('input',function(){
+
+updatePreview();
+saveToLocalStorage();
+
+});
+
+});
+
+loadFromLocalStorage();
+updatePreview();
+
+</script>
+
+</body>
+</html>
