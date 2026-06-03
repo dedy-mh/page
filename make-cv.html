@@ -413,6 +413,7 @@ div.className='section-box cert-item';
 div.innerHTML=
 '<input type="text" class="cert-name" placeholder="Nama Sertifikat" value="'+(data.name || '')+'">'+
 '<input type="text" class="cert-org" placeholder="Penerbit" value="'+(data.org || '')+'">'+
+'<input type="text" class="cert-link" placeholder="Link Sertifikat (Opsional)" value="'+(data.link || '')+'">'+
 '<button class="remove-btn" onclick="removeSection(this)">Hapus</button>';
 
 document.getElementById('certificateContainer').appendChild(div);
@@ -585,10 +586,15 @@ document.querySelectorAll('.cert-item').forEach(function(item){
 
 const name=item.querySelector('.cert-name').value;
 const org=item.querySelector('.cert-org').value;
+const link=item.querySelector('.cert-link').value;
+
+const certTitle = link
+? '<a href="'+link+'" target="_blank">'+name+'</a>'
+: name;
 
 cert +=
 '<div class="item">'+
-'<div class="item-title">'+name+'</div>'+
+'<div class="item-title">'+certTitle+'</div>'+
 '<div>'+org+'</div>'+
 '</div>';
 
@@ -655,7 +661,8 @@ softSkills:[...document.querySelectorAll('.soft-skill')].map(el=>el.value),
 
 certificates:[...document.querySelectorAll('.cert-item')].map(item=>({
 name:item.querySelector('.cert-name').value,
-org:item.querySelector('.cert-org').value
+org:item.querySelector('.cert-org').value,
+link:item.querySelector('.cert-link').value
 })),
 
 languages:[...document.querySelectorAll('.language')].map(el=>el.value)
