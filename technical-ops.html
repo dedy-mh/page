@@ -1,74 +1,28 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CV Dedy Martin Hutagalung</title><link rel="icon" href="favicon-dmh.svg" type="image/svg+xml"><script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script><style>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>CV Dedy Martin Hutagalung</title>
+
+<link rel="icon"
+href="favicon-dmh.svg"
+type="image/svg+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<style>
 
 body{
 margin:0;
 font-family:Arial,sans-serif;
 background:#eef4ff;
 color:#111827;
-}
-
-.container{
-display:flex;
-min-height:100vh;
-}
-
-.sidebar{
-width:380px;
-background:#ffffff;
 padding:20px;
-overflow:auto;
-border-right:1px solid #cbd5e1;
-}
-
-.preview{
-flex:1;
-padding:20px;
-overflow:auto;
-}
-
-input,textarea{
-width:100%;
-padding:10px;
-margin-top:5px;
-margin-bottom:12px;
-border:1px solid #cbd5e1;
-border-radius:6px;
-box-sizing:border-box;
-font-size:14px;
-}
-
-textarea{
-min-height:90px;
-resize:vertical;
-}
-
-button{
-padding:10px 14px;
-border:none;
-border-radius:6px;
-background:#1d4ed8;
-color:#fff;
-font-weight:bold;
-cursor:pointer;
-margin-bottom:10px;
-width:100%;
-transition:.2s;
-}
-
-button:hover{
-background:#1e40af;
-}
-
-.add-btn{
-background:#2563eb;
-}
-
-.section-box{
-padding:12px;
-border:1px solid #dbeafe;
-border-radius:8px;
-margin-bottom:15px;
-background:#f8fbff;
 }
 
 .cv{
@@ -76,7 +30,6 @@ background:#fff;
 max-width:850px;
 margin:auto;
 padding:35px;
-box-shadow:none;
 border-top:6px solid #1d4ed8;
 }
 
@@ -143,74 +96,46 @@ vertical-align:top;
 padding-bottom:4px;
 }
 
-@media(max-width:900px){
-
-.container{
-flex-direction:column;
+button{
+padding:10px 14px;
+border:none;
+border-radius:6px;
+background:#1d4ed8;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+max-width:220px;
+margin-bottom:20px;
 }
 
-.sidebar{
-width:100%;
-}
+</style>
 
-}
+</head>
 
-</style></head><body style="padding:20px;background:#eef4ff"><button onclick="downloadPDF()" style="max-width:220px;margin-bottom:20px">Download PDF</button><div class="cv" id="cvPreview">
+<body>
+
+<button onclick="downloadPDF()">
+Download PDF
+</button>
+
+<div class="cv" id="cvPreview">
 
 <h1 id="p_name">Dedy Martin Hutagalung</h1>
 
-<div id="p_position"><a href="technical-ops" target="_blank">Technical Operations</a></div>
+<div id="p_position"><a href="https://dedy-mh.github.io/page/technical-ops" target="_blank">CAD Designer | Technical Operations | Production Support</a></div>
 
 <br>
 
-<div id="p_contact">
-<table style="border-collapse:collapse;line-height:1.8">
-
-<tbody><tr>
-<td style="width:110px"><strong>E-mail</strong></td>
-<td style="width:15px">:</td>
-<td><a href="mailto:dedymartin12@gmail.com" target="_blank">dedymartin12@gmail.com</a></td>
-</tr>
-
-<tr>
-<td><strong>NO HP</strong></td>
-<td>:</td>
-<td>
-<a href="https://wa.me/6285668046961" target="_blank">+62 856 6804 6961</a>
- /
-<a href="https://wa.me/6282162152833" target="_blank">+62 821 6215 2833</a>
-</td>
-</tr>
-
-<tr>
-<td><strong>LinkedIn</strong></td>
-<td>:</td>
-<td><a href="https://www.linkedin.com/in/dedy-martin-hutagalung" target="_blank">linkedin.com/in/dedy-martin-hutagalung</a></td>
-</tr>
-
-<tr>
-<td><strong>Portfolio</strong></td>
-<td>:</td>
-<td><a href="https://dedy-mh.github.io/page/portfolio" target="_blank">dedy-mh.github.io/page/portfolio</a></td>
-</tr>
-
-<tr>
-<td><strong>Lokasi</strong></td>
-<td>:</td>
-<td>Sagulung, Kota Batam, Kepulauan Riau</td>
-</tr>
-
-</tbody></table>
-</div>
+<div id="p_contact"><div class="contact-item"><strong>Email:</strong> <a href="mailto:dedymartin12@gmail.com" target="_blank">dedymartin12@gmail.com</a></div><div class="contact-item"><strong>Phone:</strong> <a href="https://wa.me/6285668046961" target="_blank">+62 856 6804 6961</a> / <a href="https://wa.me/6282162152833" target="_blank">+62 821 6215 2833</a></div><div class="contact-item"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/dedy-martin-hutagalung" target="_blank">linkedin.com/in/dedy-martin-hutagalung</a></div><div class="contact-item"><strong>Portfolio:</strong> <a href="https://dedy-mh.github.io/page/portfolio" target="_blank">dedy-mh.github.io/page/portfolio</a></div><div class="contact-item"><strong>Location:</strong> Sungai Binti, Sagulung, Batam, Kepulauan Riau</div></div>
 
 <div class="section">
 <div class="section-title">Professional Summary</div>
-<div class="content" id="p_summary">Technical Operator dengan pengalaman dalam pengoperasian AutoCAD 2D, mesin laser cutting, serta support teknis produksi. Mampu membaca instruksi teknis dan bekerja secara presisi dalam lingkungan industri.</div>
+<div class="content" id="p_summary">CAD Designer dan Technical Operations Professional dengan pengalaman lebih dari 2 tahun dalam pembuatan gambar teknis menggunakan AutoCAD, pengoperasian mesin laser cutting, serta koordinasi kebutuhan produksi. Memiliki kemampuan dalam membuat dan memverifikasi drawing untuk proses manufaktur, memastikan akurasi desain, serta mendukung kelancaran operasional produksi. Terbiasa bekerja secara detail, terstruktur, dan mampu mengelola dokumentasi teknis maupun administrasi operasional dengan baik.</div>
 </div>
 
 <div class="section">
 <div class="section-title">Work Experience</div>
-<div id="p_experience"><div class="item"><div class="item-title">General Affairs Staff (Staff Bagian Umum) - Sekretariat DPRD Kabupaten</div><div class="item-sub">Jan 2022 – Jan 2026</div><div class="content"><ul><li>Menangani administrasi dan operasional kantor bagian umum</li><li>Mengelola arsip, dokumen, dan data administrasi secara rapi dan terstruktur</li><li>Melakukan input data serta pembuatan laporan menggunakan Microsoft Office (Word &amp; Excel)</li><li>Mendukung kegiatan operasional dan kebutuhan administrasi internal kantor</li><li>Berkoordinasi dengan berbagai bagian untuk memastikan kelancaran pekerjaan</li><li>Menjaga kerapihan, akurasi data, dan keteraturan sistem administrasi kantor</li></ul></div></div><div class="item"><div class="item-title">CAD Designer &amp; Laser Cutting Operator - PT JS CORP Jakarta</div><div class="item-sub">Jun 2019 – Nov 2021</div><div class="content"><ul><li>Membuat desain teknis dan gambar kerja menggunakan AutoCAD untuk kebutuhan produksi</li><li>Mengoperasikan mesin laser cutting sesuai standar operasional dan keselamatan kerja</li><li>Memastikan hasil pemotongan material sesuai ukuran, presisi, dan kualitas yang ditentukan</li><li>Melakukan pengecekan dan verifikasi desain sebelum proses produksi</li><li>Berkoordinasi dengan tim produksi untuk memastikan efisiensi dan kelancaran kerja</li><li>Menjaga ketelitian, akurasi, dan keselamatan dalam proses operasional mesin</li></ul></div></div></div>
+<div id="p_experience"><div class="item"><div class="item-title">General Affairs Staff - Sekretariat DPRD Kabupaten</div><div class="item-sub">Jan 2022 – Jan 2026</div><div class="content"><ul><li>Membantu instalasi dan konfigurasi perangkat komputer untuk kebutuhan operasional kantor</li><li>Melakukan troubleshooting dasar perangkat komputer, printer, dan koneksi jaringan.</li><li>Memberikan dukungan teknis kepada pengguna terkait penggunaan aplikasi perkantoran</li><li>Mengelola dan memastikan keamanan data administrasi kantor</li><li>Menangani administrasi dan operasional kantor bagian umum</li><li>Mengelola arsip, dokumen, dan data administrasi secara rapi dan terstruktur</li><li>Melakukan input data serta pembuatan laporan menggunakan Microsoft Office (Word &amp; Excel)</li><li>Mendukung kegiatan operasional dan kebutuhan administrasi internal kantor</li><li>Berkoordinasi dengan berbagai bagian untuk memastikan kelancaran pekerjaan</li><li>Menjaga kerapihan, akurasi data, dan keteraturan sistem administrasi kantor</li></ul></div></div><div class="item"><div class="item-title">CAD Designer &amp; Laser Cutting Operator - PT JS CORP Jakarta</div><div class="item-sub">Jun 2019 – Nov 2021</div><div class="content"><ul><li>Membuat gambar teknik 2D menggunakan AutoCAD untuk kebutuhan produksi dan manufaktur.</li><li>Menyiapkan dan memverifikasi file desain sebelum proses produksi.</li><li>Melakukan revisi gambar sesuai kebutuhan produksi dan standar kualitas.</li><li>Mengoperasikan mesin laser cutting sesuai prosedur operasional dan keselamatan kerja.</li><li>Berkoordinasi dengan tim produksi untuk memastikan desain dapat diproduksi dengan baik.</li><li>Memastikan hasil produksi sesuai ukuran, spesifikasi, dan kualitas yang ditentukan.</li><li>Menjaga dokumentasi desain dan data produksi secara teratur.</li></ul></div></div></div>
 </div>
 
 <div class="section">
@@ -220,22 +145,60 @@ width:100%;
 
 <div class="section">
 <div class="section-title">Hard Skills</div>
-<ul id="p_hardskills"><li>AutoCAD 2D Drawing</li><li>Laser Cutting Machine Operation</li><li>Basic Technical Drawing Interpretation</li><li>Material Cutting Process</li><li>Production Support Tasks</li><li>Basic CorelDraw Usage</li></ul>
+<ul id="p_hardskills"><li>AutoCAD 2D Drafting</li><li>Technical Drawing Preparation</li><li>Technical Drawing Interpretation</li><li>Drawing Verification &amp; Quality Checking</li><li>Laser Cutting Machine Operation</li><li>Production Support</li><li>Technical Documentation</li><li>Material Cutting Process</li><li>Microsoft Office (Word, Excel, PowerPoint)</li><li>Data Management &amp; Reporting</li><li>Computer Hardware Troubleshooting</li><li>Software Installation &amp; Maintenance</li><li>Windows Installation &amp; Configuration</li></ul>
 </div>
 
 <div class="section">
 <div class="section-title">Soft Skills</div>
-<ul id="p_softskills"><li>Precision &amp; Accuracy</li><li>Discipline</li><li>Focus &amp; Concentration</li><li>Problem Solving</li><li>Responsibility</li><li>Team Coordination</li></ul>
+<ul id="p_softskills"><li>Attention to Detail</li><li>Analytical Thinking</li><li>Problem Solving</li><li>Communication Skills</li><li>Teamwork &amp; Collaboration</li><li>Time Management</li><li>Adaptability</li><li>Accuracy &amp; Precision</li></ul>
 </div>
 
 <div class="section">
 <div class="section-title">Certifications &amp; Training</div>
-<div id="p_certificates"><div class="item"><div class="item-title">Cara Mudah Menggunakan Aplikasi Perkantoran Online (Micro Skill)</div><div>digitalent.komdigi.go.id</div></div><div class="item"><div class="item-title">Introduction To Cloud Computing (Micro Skill)</div><div>digitalent.komdigi.go.id</div></div></div>
+<div id="p_certificates"><div class="item"><div class="item-title"><a href="https://drive.google.com/file/d/1-Y-B0A99X9VM65Cpx3VCAQ-IoQb-JBBc/view?usp=sharing" target="_blank">Introduction To Cloud Computing</a></div><div>digitalent.komdigi.go.id</div></div><div class="item"><div class="item-title"><a href="https://drive.google.com/file/d/1FicErhDqIYoZG1bL_HY5driXaLAPGJ2F/view?usp=sharing" target="_blank">Ethical Hacker For Dummies</a></div><div>digitalent.komdigi.go.id</div></div><div class="item"><div class="item-title"><a href="https://drive.google.com/file/d/1kGLqiysONske5bWuuEOUThcYpohUVXjA/view?usp=sharing" target="_blank">Cara Mudah Menggunakan Aplikasi Perkantoran Online</a></div><div>digitalent.komdigi.go.id</div></div><div class="item"><div class="item-title"><a href="https://drive.google.com/file/d/1W5YTBLEFqVG4YIzEbAkgDmRcrkh_xVqF/view?usp=sharing" target="_blank">Seni Public Speaking Untuk Pemimpin Muda Berkarakter</a></div><div>digitalent.komdigi.go.id</div></div></div>
 </div>
 
 <div class="section">
 <div class="section-title">Languages</div>
-<ul id="p_languages"><li>Indonesian – Native</li><li>English — Intermediate</li></ul>
+<ul id="p_languages"><li>Indonesian — Native</li><li>English — Basic</li></ul>
 </div>
 
-</div><script>function downloadPDF(){const element=document.getElementById("cvPreview");html2pdf().set({margin:[10,10,10,10],filename:"CV-ATS.pdf",image:{type:"jpeg",quality:1},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},pagebreak:{mode:["css","legacy"]}}).from(element).save();}</script></body></html>
+</div>
+
+<script>
+
+function downloadPDF(){
+
+const element =
+document.getElementById('cvPreview');
+
+html2pdf()
+.set({
+margin:[10,10,10,10],
+filename:'CV-Dedy-Martin-Hutagalung.pdf',
+image:{
+type:'jpeg',
+quality:1
+},
+html2canvas:{
+scale:2,
+useCORS:true
+},
+jsPDF:{
+unit:'mm',
+format:'a4',
+orientation:'portrait'
+},
+pagebreak:{
+mode:['css','legacy']
+}
+})
+.from(element)
+.save();
+
+}
+
+</script>
+
+</body>
+</html>
